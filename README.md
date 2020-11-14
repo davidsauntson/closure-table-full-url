@@ -2,12 +2,12 @@
 
 Small experiment to see how easy it is to implement a closure table, one of the more elegant SQL implementations.
 
-This is a potential replacement for the full url generation lambda that uses a more familiar tech stack, removes the need for tree traversal and makes xero (0!) calls to the contentful OR content APIs.
+This is a potential replacement for the full url generation lambda that uses a more familiar tech stack, removes the need for tree traversal and makes zero (0!) calls to the contentful OR content APIs - we can just consume the webhook we are already emitting from contentful.
 
 
 ## Closure what
 
-I stumbled upon the principle of a closure table whilst watching [one of the worst films I have ever seen](https://en.wikipedia.org/wiki/Happy_Death_Day_2U).  It is, IMHO a very elegant, simple and efficient solution to the problem we have with generating full urls for page objects in contentful.
+I stumbled upon the principle of a closure table whilst watching [one of the worst films I have ever seen](https://en.wikipedia.org/wiki/Happy_Death_Day_2U).  It is, IMHO a very elegant, simple and efficient solution to the problem we have with generating full urls for page objects in contentful. (Closure tables, not the film).
 
 It represents a tree by storing each node of the tree in a heirarchy table which has three columns: `parent_id`, `child_id`, `depth`.  A node will appear more than once in the table - one time for itself and once for each of its ancestor nodes on the path back to the / a root node.  The `depth` field represents how many steps removed that node is from the parent node with `parent_id`. 
 
