@@ -34,7 +34,7 @@ I stumbled upon the principle of a closure table whilst watching [one of the wor
 
 It represents a tree by storing each node of the tree in a heirarchy table which has three columns: `parent_id`, `child_id`, `depth`.  A node will appear more than once in the table - one time for itself and once for each of its ancestor nodes on the path back to the / a root node.  The `depth` field represents how many steps removed that node is from the parent node with `parent_id`. 
 
-[This website explains it better than I can]((https://dirtsimple.org/2010/11/simplest-way-to-do-tree-based-queries.html).
+[This website explains it better than I can](https://dirtsimple.org/2010/11/simplest-way-to-do-tree-based-queries.html).
 
 We can store the nodes themselves in a data table, eg `pages` and the associated hierarchy information in a different heiarchy table, eg `page_heirarchy`.
 
