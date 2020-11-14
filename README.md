@@ -26,7 +26,7 @@ This project is configured to use a postgres role called `myapp` because I'm a r
 
 Once you're up and running, play around by changing the parent ids and seeing the SQL that is executed in the rails console.  The full url column of the table at `/pages` is generated using the methods in the gem mentioned below.  The gem also handles updates etc automatically due to the `has_closure_tree` attribute of the model.
 
-Try chaning the parent ids and looking at what happens to the full urls.  You can also run the rails console to see the SQL statements executed, but you know that already :smile:.
+Try changing the parent ids and looking at what happens to the full urls.  You can also run the rails console to see the SQL statements executed, but you know that already :smile:.
 
 ## Closure what
 
