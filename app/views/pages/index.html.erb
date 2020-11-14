@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pages</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Url</th>
+            <th>Parentid</th>
+            <th>full url</th>
+            <th colspan="3"></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <% @pages.each do |page| %>
+        <tr>
+            <td><%= page.id %></td>
+            <td><%= page.url %></td>
+            <td><%= page.parent_id %></td>
+            <td>
+                <%= page.self_and_ancestors.reverse.pluck(:url).join('/') %>
+            </td>
+            <td><%= link_to 'Show', page %></td>
+            <td><%= link_to 'Edit', edit_page_path(page) %></td>
+            <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+        <% end %>
+    </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Page', new_page_path %>
