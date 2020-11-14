@@ -5,6 +5,29 @@ Small experiment to see how easy it is to implement a closure table, one of the 
 This is a potential replacement for the full url generation lambda that uses a more familiar tech stack, removes the need for tree traversal and makes zero (0!) calls to the contentful OR content APIs - we can just consume the webhook we are already emitting from contentful.
 
 
+## Getting started
+
+You will need postresql and yarn if you don't have them.
+```
+brew install postgresql
+brew install yarn
+```
+
+```
+yarn install
+bundle install
+rake db:setup
+bundle exec rails s
+```
+
+Go to [`http://localhost:3000/pages`](http://localhost:3000/pages).
+
+This project is configured to use a postgres role called `myapp` because I'm a ruby n00b.
+
+Once you're up and running, play around by changing the parent ids and seeing the SQL that is executed in the rails console.  The full url column of the table at `/pages` is generated using the methods in the gem mentioned below.  The gem also handles updates etc automatically due to the `has_closure_tree` attribute of the model.
+
+Try chaning the parent ids and looking at what happens to the full urls.  You can also run the rails console to see the SQL statements executed, but you know that already :smile:.
+
 ## Closure what
 
 I stumbled upon the principle of a closure table whilst watching [one of the worst films I have ever seen](https://en.wikipedia.org/wiki/Happy_Death_Day_2U).  It is, IMHO a very elegant, simple and efficient solution to the problem we have with generating full urls for page objects in contentful. (Closure tables, not the film).
@@ -26,7 +49,7 @@ When we update the parent of a node, we only need three `insert/update` queries 
 
 ## Ruby
 
-There is, of course, a ruby gem that encapsulates this behaviour and has all the methods I believe we would need to re-implement the full url lambda.
+There is, of course, a ruby gem called [`closure_tree`](https://github.com/ClosureTree/closure_tree) that encapsulates this behaviour and has all the methods I believe we would need to re-implement the full url lambda.
 
 This repo is a demonstration of using this ruby gem with some dummy seed data.
 
