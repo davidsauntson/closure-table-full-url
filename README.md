@@ -26,22 +26,21 @@ This project is configured to use a postgres role called `myapp` because I'm a r
 
 Once you're up and running, play around by changing the parent ids and seeing the SQL that is executed in the rails console.  The full url column of the table at `/pages` is generated using the methods in the gem mentioned below.  The gem also handles updates etc automatically due to the `has_closure_tree` attribute of the model.
 
-Try changing the parent ids and looking at what happens to the full urls.  You can also run the rails console to see the SQL statements executed, but you know that already :smile:.
 
 ## Closure what
 
 I stumbled upon the principle of a closure table whilst watching [one of the worst films I have ever seen](https://en.wikipedia.org/wiki/Happy_Death_Day_2U).  It is, IMHO a very elegant, simple and efficient solution to the problem we have with generating full urls for page objects in contentful. (Closure tables, not the film).
 
-It represents a tree by storing each node of the tree in a heirarchy table which has three columns: `parent_id`, `child_id`, `depth`.  A node will appear more than once in the table - one time for itself and once for each of its ancestor nodes on the path back to the / a root node.  The `depth` field represents how many steps removed that node is from the parent node with `parent_id`. 
+It represents a tree by storing each node of the tree in a hierarchy table which has three columns: `parent_id`, `child_id`, `depth`.  A node will appear more than once in the table - one time for itself and once for each of its ancestor nodes on the path back to the / a root node.  The `depth` field represents how many steps removed that node is from the parent node with `parent_id`. 
 
 [This website explains it better than I can](https://dirtsimple.org/2010/11/simplest-way-to-do-tree-based-queries.html).
 
-We can store the nodes themselves in a data table, eg `pages` and the associated hierarchy information in a different heiarchy table, eg `page_heirarchy`.
+We can store the nodes themselves in a data table, eg `pages` and the associated hierarchy information in a different heiarchy table, eg `page_hierarchy`.
 
 
 ### Efficient
 
-When we want to know the full url of a node, we can find all its ancestors all the way back to the root with a **single `select` query**, by joining the heirarchy table to itself.
+When we want to know the full url of a node, we can find all its ancestors all the way back to the root with a **single `select` query**, by joining the hierarchy table to itself.
 
 When we create a new node, we only need two `insert` queries (one for each table).
 
