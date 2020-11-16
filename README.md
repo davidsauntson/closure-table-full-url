@@ -42,7 +42,7 @@ We can store the nodes themselves in a data table, eg `pages` and the associated
 
 When we want to know the full url of a node, we can find all its ancestors all the way back to the root with a **single `select` query**, by joining the hierarchy table to itself.
 
-When we create a new node, we only need two `insert` queries (one for each table).
+When we create a new node, we only need two `insert` queries.
 
 When we update the parent of a node, we only need three `insert/update` queries **regardless of the size of the sub-tree**.
 
